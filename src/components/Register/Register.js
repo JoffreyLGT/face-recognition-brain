@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import globalVars from '../../settings/GlobalVars'
+const { apiUrl } = globalVars;
 
 class Register extends Component {
   //const Register = ({onRouteChange}) => {
@@ -8,7 +10,7 @@ class Register extends Component {
     this.state = {
       email: '',
       password: '',
-      name:''
+      name: ''
     }
   }
 
@@ -25,7 +27,7 @@ class Register extends Component {
   }
 
   onSubmitRegister = () => {
-    fetch('http://localhost:3000/register/', {
+    fetch(`${apiUrl}/register/`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -36,11 +38,12 @@ class Register extends Component {
     })
       .then(response => response.json())
       .then(user => {
-        if (user) {
+        if (user.id) {
           this.props.loadUser(user)
           this.props.onRouteChange('home')
         }
       })
+      .catch(console.log)
   }
 
 
@@ -53,30 +56,30 @@ class Register extends Component {
               <legend className="f1 fw6 ph0 mh0">Register</legend>
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
-                <input 
-                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                type="text" 
-                name="name" 
-                id="name"
-                onChange={this.onNameChange} />
+                <input
+                  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  type="text"
+                  name="name"
+                  id="name"
+                  onChange={this.onNameChange} />
               </div>
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
-                <input 
-                className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                type="email" 
-                name="email-address" 
-                id="email-address"
-                onChange={this.onEmailChange} />
+                <input
+                  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  type="email"
+                  name="email-address"
+                  id="email-address"
+                  onChange={this.onEmailChange} />
               </div>
               <div className="mv3">
                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                <input 
-                className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                type="password" 
-                name="password" 
-                id="password"
-                onChange={this.onPasswordChange} />
+                <input
+                  className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                  type="password"
+                  name="password"
+                  id="password"
+                  onChange={this.onPasswordChange} />
               </div>
             </fieldset>
             <div>

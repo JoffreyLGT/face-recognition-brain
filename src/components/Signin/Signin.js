@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import globalVars from '../../settings/GlobalVars'
+const {apiUrl} = globalVars;
 
 class Signin extends Component {
 
@@ -19,7 +21,7 @@ class Signin extends Component {
   }
 
   onSubmitSignIn = () => {
-    fetch('http://localhost:3000/signin/', {
+    fetch(`${apiUrl}/signin/`, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
